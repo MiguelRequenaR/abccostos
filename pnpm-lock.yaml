@@ -59,9 +59,9 @@ importers:
       '@tanstack/react-table':
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      '@workspace/api-presupuestos':
+      '@workspace/api-almacen':
         specifier: workspace:*
-        version: link:../../packages/api-presupuestos
+        version: link:../../packages/api-almacen
       '@workspace/supabase':
         specifier: workspace:*
         version: link:../../packages/supabase
