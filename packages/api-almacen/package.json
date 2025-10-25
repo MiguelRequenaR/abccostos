@@ -1,0 +1,32 @@
+{
+  "name": "@workspace/api-almacen",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    "./services": {
+      "development": "./src/services/index.ts",
+      "production": "./dist/services/index.js",
+      "types": "./dist/services/index.d.ts",
+      "default": "./src/services/index.ts"
+    },
+    "./queries": {
+      "development": "./src/queries/index.ts",
+      "production": "./dist/queries/index.js", 
+      "types": "./dist/queries/index.d.ts",
+      "default": "./src/queries/index.ts"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^24.9.1",
+    "@workspace/typescript-config": "workspace:*",
+    "typescript": "latest"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.85.3",
+    "@workspace/supabase": "workspace:*",
+    "sonner": "^2.0.7"
+  }
+}

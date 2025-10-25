@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from '@workspace/ui/components/dropdown-menu'
 
-interface UnidadProduccion {
+interface GuiaIngreso {
   id: string
   fecha: string
   proveedor: string
@@ -25,7 +25,7 @@ interface UnidadProduccion {
   observacion: string
 }
 
-const mockData: UnidadProduccion[] = [
+const mockData: GuiaIngreso[] = [
   {
     id: '001',
     fecha: '2025-01-01',

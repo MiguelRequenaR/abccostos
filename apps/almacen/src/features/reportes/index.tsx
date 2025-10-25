@@ -6,22 +6,10 @@ import { ProfileDropdown } from '@/components/profile-dropdown'
 import { CustomEmpty } from '@/components/custom-empty'
 import PrimaryTabs from './components/primarytabs'
 import Inventario from './components/inventario'
-import { BrainIcon, HouseIcon } from 'lucide-react'
+import { HouseIcon } from 'lucide-react'
 
 const getEmptyContent = (primaryTab: string) => {
   switch (primaryTab) {
-    case 'guia-ingreso':
-      return {
-        title: "Sin Alimentación",
-        description: "Aqui se mostrarán los datos de alimentación",
-        icon: <BrainIcon />
-      }
-    case 'guia-salida':
-      return {
-        title: "Sin Varios",
-        description: "Aqui se mostrarán los datos varios",
-        icon: <BrainIcon />
-      }
     default:
       return {
         title: "Sin Contenido",
@@ -33,20 +21,8 @@ const getEmptyContent = (primaryTab: string) => {
 
 const renderTabContent = (activePrimaryTab: string) => {
   switch (activePrimaryTab) {
-    case "relacion-equipos":
+    case "inventario":
       return <Inventario />
-    case "pd-equipos":
-      return <CustomEmpty {...getEmptyContent('pd-equipos')} />
-    case "liquidacion-equipos":
-      return <CustomEmpty {...getEmptyContent('liquidacion-equipos')} />
-    case "combustible":
-      return <CustomEmpty {...getEmptyContent('combustible')} />
-    case "valorizaciones":
-      return <CustomEmpty {...getEmptyContent('valorizaciones')} />
-    case "ratios":
-      return <CustomEmpty {...getEmptyContent('ratios')} />
-    case "reportes":
-      return <CustomEmpty {...getEmptyContent('reportes')} />
     default: {
       const emptyContent = getEmptyContent(activePrimaryTab)
       return <CustomEmpty {...emptyContent} />
@@ -55,7 +31,7 @@ const renderTabContent = (activePrimaryTab: string) => {
 }
 
 export function Reportes() {
-  const [activePrimaryTab, setActivePrimaryTab] = useState('relacion-equipos')
+  const [activePrimaryTab, setActivePrimaryTab] = useState('inventario')
 
   return (
     <>

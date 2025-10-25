@@ -1,38 +1,33 @@
 import { create } from 'zustand'
 import type { User, Session } from '@workspace/supabase/client'
 import { supabase } from '@workspace/supabase/client'
+import { type Database } from '@workspace/supabase/types'
 
-export interface Profile {
-  id: string
-  name: string
-  last_name: string
-  image_url: string | null
-  role: string
-}
+type Usuario = Database['public']['Tables']['usuarios']['Row']
 
 interface AuthState {
   user: User | null
   session: Session | null
-  profile: Profile | null
+  usuario: Usuario | null
   isLoading: boolean
   setAuth: (user: User | null, session: Session | null) => Promise<void>
   clearAuth: () => void
   initialize: () => Promise<void>
-  fetchProfile: (userId: string) => Promise<Profile | null>
+  fetchUsuario: (userId: string) => Promise<Usuario | null>
 }
 
 export const useAuthStore = create<AuthState>()((set, get) => ({
   user: null,
   session: null,
-  profile: null,
+  usuario: null,
   isLoading: true,
   
-  fetchProfile: async (userId: string) => {
+  fetchUsuario: async (idAuth: string) => {
     try {
       const { data, error } = await supabase
-        .from('profiles')
-        .select('id, name, last_name, image_url, role')
-        .eq('id', userId)
+        .from('usuarios')
+        .select('id, id_auth, nombres, apellidos, avatar, rol, created_at, estado')
+        .eq('id_auth', idAuth)
         .single()
 
       if (error) {
@@ -40,7 +35,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
         return null
       }
 
-      return data as Profile
+      return data as unknown as Usuario
     } catch (error) {
       console.error('Error fetching profile:', error)
       return null
@@ -49,14 +44,14 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
   
   setAuth: async (user, session) => {
     if (user) {
-      const profile = await get().fetchProfile(user.id)
-      set({ user, session, profile, isLoading: false })
+      const usuario = await get().fetchUsuario(user.id)
+      set({ user, session, usuario, isLoading: false })
     } else {
-      set({ user, session, profile: null, isLoading: false })
+      set({ user, session, usuario: null, isLoading: false })
     }
   },
   
-  clearAuth: () => set({ user: null, session: null, profile: null, isLoading: false }),
+  clearAuth: () => set({ user: null, session: null, usuario: null, isLoading: false }),
   
   initialize: async () => {
     try {
@@ -64,24 +59,24 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
       const { data: { session } } = await supabase.auth.getSession()
       
       if (session) {
-        const profile = await get().fetchProfile(session.user.id)
-        set({ user: session.user, session, profile, isLoading: false })
+        const usuario = await get().fetchUsuario(session.user.id)
+        set({ user: session.user, session, usuario, isLoading: false })
       } else {
-        set({ user: null, session: null, profile: null, isLoading: false })
+        set({ user: null, session: null, usuario: null, isLoading: false })
       }
 
       // Listen for auth changes
       supabase.auth.onAuthStateChange(async (_event, session) => {
         if (session) {
-          const profile = await get().fetchProfile(session.user.id)
-          set({ user: session.user, session, profile, isLoading: false })
+          const usuario = await get().fetchUsuario(session.user.id)
+          set({ user: session.user, session, usuario, isLoading: false })
         } else {
-          set({ user: null, session: null, profile: null, isLoading: false })
+          set({ user: null, session: null, usuario: null, isLoading: false })
         }
       })
     } catch (error) {
       console.error('Error initializing auth:', error)
-      set({ user: null, session: null, profile: null, isLoading: false })
+      set({ user: null, session: null, usuario: null, isLoading: false })
     }
   },
 }))

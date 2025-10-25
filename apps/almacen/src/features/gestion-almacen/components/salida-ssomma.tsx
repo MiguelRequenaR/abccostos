@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from '@workspace/ui/components/dropdown-menu'
 
-interface UnidadProduccion {
+interface SalidaSsomma {
   id: string
   fecha: string
   trabajo: string
@@ -25,7 +25,7 @@ interface UnidadProduccion {
   observacion: string
 }
 
-const getEstadoStyles = (estado: UnidadProduccion['estado']) => {
+const getEstadoStyles = (estado: SalidaSsomma['estado']) => {
   switch (estado) {
     case 'Pendiente':
       return 'bg-[#fef5e3] text-[#f7b940] px-2 py-1 rounded-[4px] text-xs font-medium'
@@ -38,7 +38,7 @@ const getEstadoStyles = (estado: UnidadProduccion['estado']) => {
   }
 }
 
-const mockData: UnidadProduccion[] = [
+const mockData: SalidaSsomma[] = [
   {
     id: '001',
     fecha: '2025-01-01',
@@ -102,7 +102,6 @@ export default function SalidaSsomma() {
           </Button>
         </div>
         <div className="flex items-center gap-2">
-        <div className="flex items-center gap-2">
           <Button variant='ghost' className='gap-2'>
             <Plus className='h-5 w-5' />
             <span className="hidden sm:inline">Nuevo vale</span>
@@ -111,7 +110,6 @@ export default function SalidaSsomma() {
             <Printer className='h-5 w-5' />
             <span className="hidden sm:inline">Imprimir</span>
           </Button>
-        </div>
         </div>
       </div>
 

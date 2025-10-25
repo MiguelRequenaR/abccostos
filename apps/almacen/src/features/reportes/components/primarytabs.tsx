@@ -15,7 +15,7 @@ export default function PrimaryTabs({
       <div className='flex items-center justify-between'>
         <TabsList className='text-foreground h-auto rounded-none border-b bg-transparent px-0'>
           <TabsTrigger
-            value='relacion-equipos'
+            value='inventario'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
             <BoxesIcon
@@ -29,7 +29,7 @@ export default function PrimaryTabs({
             </span>
           </TabsTrigger>
           <TabsTrigger
-            value='pd-equipos'
+            value='bincard'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
             <CreditCardIcon
@@ -42,7 +42,7 @@ export default function PrimaryTabs({
             </span>
           </TabsTrigger>
           <TabsTrigger
-            value='liquidacion-equipos'
+            value='kardex-valorizado'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
             <FileIcon
@@ -55,7 +55,7 @@ export default function PrimaryTabs({
             </span>
           </TabsTrigger>
           <TabsTrigger
-            value='combustible'
+            value='materiales-entregados'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
             <BoxesIcon
@@ -68,7 +68,7 @@ export default function PrimaryTabs({
             </span>
           </TabsTrigger>
           <TabsTrigger
-            value='valorizaciones'
+            value='reportes-ssomma'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
             <ChartNoAxesCombinedIcon

@@ -212,8 +212,8 @@ export default function Inventario() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {inventarioData.map((item, index) => (
-                <TableRow key={index}>
+              {inventarioData.map((item) => (
+                <TableRow key={item.codigo}>
                   <TableCell className='font-medium'>{item.codigo}</TableCell>
                   <TableCell>{item.descripcion}</TableCell>
                   <TableCell>{item.unidad}</TableCell>

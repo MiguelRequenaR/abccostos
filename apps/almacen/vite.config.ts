@@ -20,6 +20,7 @@ export default defineConfig({
       //TODO: Revisar si es necesario
       '@workspace/ui': path.resolve(__dirname, '../../packages/ui/src'),
       '@workspace/supabase': path.resolve(__dirname, '../../packages/supabase/src'),
+      '@workspace/api-almacen': path.resolve(__dirname, '../../packages/api-almacen/src'),
       '@workspace/api-presupuestos': path.resolve(__dirname, '../../packages/api-presupuestos/src'),
     },
   },

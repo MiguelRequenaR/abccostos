@@ -7,16 +7,10 @@ import PrimaryTabs from './components/primarytabs'
 import SecondaryTabs from './components/secondarytabs'
 import Rqs from './components/rqs'
 import { CustomEmpty } from '@/components/custom-empty'
-import { FileTextIcon, HouseIcon } from 'lucide-react'
+import { HouseIcon } from 'lucide-react'
 
 const getEmptyContent = (primaryTab: string) => {
   switch (primaryTab) {
-    case 'rqs':
-      return {
-        title: 'Sin RqS',
-        description: 'Aqui se mostrarán los RqS',
-        icon: <FileTextIcon />
-      }
     default:
       return {
         title: 'Sin Contenido',

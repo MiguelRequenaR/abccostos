@@ -5,27 +5,15 @@ import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { CustomEmpty } from '@/components/custom-empty'
 import PrimaryTabs from './components/primarytabs'
-import Concreto from './components/concreto'
-import { BrainIcon, HouseIcon } from 'lucide-react'
+import Materiales from './components/materiales'
+import { HouseIcon } from 'lucide-react'
 
 const getEmptyContent = (primaryTab: string) => {
   switch (primaryTab) {
-    case 'guia-ingreso':
-      return {
-        title: "Sin Alimentación",
-        description: "Aqui se mostrarán los datos de alimentación",
-        icon: <BrainIcon />
-      }
-    case 'guia-salida':
-      return {
-        title: "Sin Varios",
-        description: "Aqui se mostrarán los datos varios",
-        icon: <BrainIcon />
-      }
     default:
       return {
         title: "Sin Contenido",
-        description: "Aqui se mostrarán los contenidos",
+        description: "Aqui se mostrará el contenido",
         icon: <HouseIcon />
       }
   }
@@ -33,12 +21,8 @@ const getEmptyContent = (primaryTab: string) => {
 
 const renderTabContent = (activePrimaryTab: string) => {
   switch (activePrimaryTab) {
-    case "orden-compra":
-      return <Concreto />
-    case "guia-ingreso":
-      return <CustomEmpty {...getEmptyContent('guia-ingreso')} />
-    case "guia-salida":
-      return <CustomEmpty {...getEmptyContent('guia-salida')} />
+    case "materiales":
+      return <Materiales />
     default: {
       const emptyContent = getEmptyContent(activePrimaryTab)
       return <CustomEmpty {...emptyContent} />
@@ -47,7 +31,7 @@ const renderTabContent = (activePrimaryTab: string) => {
 }
 
 export function ControlVarios() {
-  const [activePrimaryTab, setActivePrimaryTab] = useState('orden-compra')
+  const [activePrimaryTab, setActivePrimaryTab] = useState('materiales')
 
   return (
     <>

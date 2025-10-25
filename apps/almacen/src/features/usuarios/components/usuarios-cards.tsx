@@ -14,13 +14,12 @@ import {
 } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'
 import { UsuarioCard } from './usuario-card'
-import type { Usuario } from '@workspace/api-presupuestos/services'
+import type { Usuario } from '@workspace/api-almacen/services'
 
 const roles = [
-  { value: 'admin', label: 'Admin' },
-  { value: 'provider', label: 'Provider' },
-  { value: 'seller', label: 'Seller' },
-  { value: 'registered', label: 'Registered' },
+  { value: 'propietario', label: 'Propietario' },
+  { value: 'principal', label: 'Principal' },
+  { value: 'secundario', label: 'Secundario' },
 ]
 
 const estados = [

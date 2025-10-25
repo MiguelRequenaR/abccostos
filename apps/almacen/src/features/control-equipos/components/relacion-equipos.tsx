@@ -139,17 +139,25 @@ export default function RelacionEquipos() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {equiposData.map((equipo, index) => (
-                <TableRow key={index}>
+              {equiposData.map((equipo) => (
+                <TableRow key={equipo.name}>
                   <TableCell className='font-medium'>{equipo.name}</TableCell>
                   <TableCell>{equipo.cantidad}</TableCell>
                   <TableCell>
                     <Badge 
-                      variant={equipo.estado === 'Activo' ? 'default' : 'secondary'}
+                      variant={
+                        equipo.estado === 'Activo' 
+                          ? 'default' 
+                          : equipo.estado === 'Mantenimiento' 
+                            ? 'secondary' 
+                            : 'destructive'
+                      }
                       className={
                         equipo.estado === 'Activo' 
                           ? 'bg-green-100 text-green-800' 
-                          : 'bg-yellow-100 text-yellow-800'
+                          : equipo.estado === 'Mantenimiento'
+                            ? 'bg-yellow-100 text-yellow-800'
+                            : 'bg-red-100 text-red-800'
                       }
                     >
                       {equipo.estado}

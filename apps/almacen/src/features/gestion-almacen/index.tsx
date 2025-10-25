@@ -10,16 +10,10 @@ import GuiaIngreso from './components/guia-ingreso'
 import GuiaSalida from './components/guia-salida'
 import SalidaCampo from './components/salida-campo'
 import SalidaSsomma from './components/salida-ssomma'
-import { BrainIcon, HouseIcon } from 'lucide-react'
+import { HouseIcon } from 'lucide-react'
 
 const getEmptyContent = (primaryTab: string) => {
   switch (primaryTab) {
-    case 'orden-compra':
-      return {
-        title: "Sin Orden de Compra",
-        description: "Aqui se mostrarán las ordenes de compra",
-        icon: <BrainIcon />
-      }
     default:
       return {
         title: "Sin Contenido",

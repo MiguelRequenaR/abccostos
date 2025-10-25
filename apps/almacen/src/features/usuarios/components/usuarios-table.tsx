@@ -20,7 +20,7 @@ import { useState } from 'react'
 
 import { DataTableToolbar } from '@/components/data-table'
 import { DataTablePaginationControls } from '@/components/data-table/pagination-controls'
-import type { Usuario } from '@workspace/api-presupuestos/services'
+import type { Usuario } from '@workspace/api-almacen/services'
 import { Badge } from '@workspace/ui/components/badge'
 import { Button } from '@workspace/ui/components/button'
 import { Checkbox } from '@workspace/ui/components/checkbox'
@@ -48,10 +48,9 @@ type UsuariosTableProps = {
 }
 
 const roles = [
-  { value: 'admin', label: 'Admin' },
-  { value: 'provider', label: 'Provider' },
-  { value: 'seller', label: 'Seller' },
-  { value: 'registered', label: 'Registered' },
+  { value: 'propietario', label: 'Propietario' },
+  { value: 'principal', label: 'Principal' },
+  { value: 'secundario', label: 'Secundario' },
 ]
 
 const estados = [
@@ -154,7 +153,7 @@ export function UsuariosTable({ data }: UsuariosTableProps) {
         const rol = row.getValue('rol') as string
         const roleConfig = roles.find(r => r.value === rol)
         return (
-          <Badge variant={rol === 'admin' ? 'default' : 'secondary'}>
+          <Badge variant={rol === 'principal' ? 'default' : 'secondary'}>
             {roleConfig?.label || rol}
           </Badge>
         )

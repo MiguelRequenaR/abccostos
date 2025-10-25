@@ -5,7 +5,7 @@ import { DashboardAdmin } from '@/features/dashboard-admin'
 export const Route = createFileRoute('/_authenticated/(principal)/dashboard-admin/')({
   component: RouteComponent,
   beforeLoad: () => {
-    requireRole(['admin'])
+    requireRole(['principal'])
   },
 })
 

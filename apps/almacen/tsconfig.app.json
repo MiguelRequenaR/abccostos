@@ -18,7 +18,11 @@
     /* Alias */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@workspace/ui/*": ["../../packages/ui/src/*"],
+      "@workspace/supabase/*": ["../../packages/supabase/src/*"],
+      "@workspace/api-almacen/*": ["../../packages/api-almacen/src/*"],
+      "@workspace/api-presupuestos/*": ["../../packages/api-presupuestos/src/*"]
     },
 
     /* Linting */

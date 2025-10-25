@@ -5,17 +5,11 @@ import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { CustomEmpty } from '@/components/custom-empty'
 import PrimaryTabs from './components/primarytabs'
-import { BoxesIcon, HouseIcon } from 'lucide-react'
+import { HouseIcon } from 'lucide-react'
 import { RecursosCards } from './components/recursos'
 
 const getEmptyContent = (primaryTab: string) => {
   switch (primaryTab) {
-    case 'recursos':
-      return {
-        title: "Sin Recursos",
-        description: "Aqui se mostrarán los datos de recursos",
-        icon: <BoxesIcon />
-      }
     default:
       return {
         title: "Sin Contenido",
@@ -27,20 +21,8 @@ const getEmptyContent = (primaryTab: string) => {
 
 const renderTabContent = (activePrimaryTab: string) => {
   switch (activePrimaryTab) {
-    case "relacion-equipos":
+    case "recursos":
       return <RecursosCards />
-    case "pd-equipos":
-      return <CustomEmpty {...getEmptyContent('pd-equipos')} />
-    case "liquidacion-equipos":
-      return <CustomEmpty {...getEmptyContent('liquidacion-equipos')} />
-    case "combustible":
-      return <CustomEmpty {...getEmptyContent('combustible')} />
-    case "valorizaciones":
-      return <CustomEmpty {...getEmptyContent('valorizaciones')} />
-    case "ratios":
-      return <CustomEmpty {...getEmptyContent('ratios')} />
-    case "reportes":
-      return <CustomEmpty {...getEmptyContent('reportes')} />
     default: {
       const emptyContent = getEmptyContent(activePrimaryTab)
       return <CustomEmpty {...emptyContent} />
@@ -49,7 +31,7 @@ const renderTabContent = (activePrimaryTab: string) => {
 }
 
 export function Catalogos() {
-  const [activePrimaryTab, setActivePrimaryTab] = useState('relacion-equipos')
+  const [activePrimaryTab, setActivePrimaryTab] = useState('recursos')
 
   return (
     <>

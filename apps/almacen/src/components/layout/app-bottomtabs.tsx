@@ -6,11 +6,11 @@ import type { NavLink } from './types'
 
 const getRoleGroupTitle = (role: string): string => {
   switch (role) {
-    case 'owner':
+    case 'propietario':
       return 'Propietario'
-    case 'admin':
+    case 'principal':
       return 'Administrador'
-    case 'user':
+    case 'secundario':
       return 'Proyecto'
     default:
       return 'Proyecto'
@@ -20,10 +20,10 @@ const getRoleGroupTitle = (role: string): string => {
 export default function AppBottomTabs() {
   const location = useLocation()
   const pathname = location.pathname || '/'
-  const { profile, user } = useAuthStore()
-  const sidebarData = getSidebarData(profile, user?.email)
+  const { usuario, user } = useAuthStore()
+  const sidebarData = getSidebarData(usuario, user?.email)
 
-  const userRole = profile?.role || 'user'
+  const userRole = usuario?.rol || 'secundario'
   const groupTitle = getRoleGroupTitle(userRole)
 
   const navGroup = sidebarData.navGroups.find(

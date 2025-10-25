@@ -34,12 +34,12 @@ const stockData = [
   { name: 'Mayo', stock: 1300, movimientos: 48 },
 ]
 
-export default function Concreto() {
+export default function Materiales() {
   return (
     <div className='space-y-6'>
       {/* Gráfico de Inventario */}
       <div className='rounded-lg border bg-card p-6'>
-        <h3 className='mb-4 text-lg font-semibold'>Concreto</h3>
+        <h3 className='mb-4 text-lg font-semibold'>Inventario de Concreto</h3>
         <ResponsiveContainer width='100%' height={300}>
           <ComposedChart data={inventarioData}>
             <CartesianGrid strokeDasharray='3 3' />
@@ -54,7 +54,7 @@ export default function Concreto() {
       {/* Gráfico de Movimientos */}
       <div className='grid gap-6 md:grid-cols-2'>
         <div className='rounded-lg border bg-card p-6'>
-          <h3 className='mb-4 text-lg font-semibold'>Concreto</h3>
+          <h3 className='mb-4 text-lg font-semibold'>Movimientos de Concreto</h3>
           <ResponsiveContainer width='100%' height={250}>
             <PieChart>
               <Pie
@@ -76,7 +76,7 @@ export default function Concreto() {
         </div>
 
         <div className='rounded-lg border bg-card p-6'>
-          <h3 className='mb-4 text-lg font-semibold'>Materiales</h3>
+          <h3 className='mb-4 text-lg font-semibold'>Stock y Movimientos</h3>
           <ResponsiveContainer width='100%' height={250}>
             <ComposedChart data={stockData}>
               <CartesianGrid strokeDasharray='3 3' />

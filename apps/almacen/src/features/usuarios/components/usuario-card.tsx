@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
-import { Mail, MoreHorizontal, User } from 'lucide-react'
+import { MoreHorizontal, User } from 'lucide-react'
 import { getRouteApi } from '@tanstack/react-router'
 
 import { Badge } from '@workspace/ui/components/badge'
@@ -14,7 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@workspace/ui/components/dropdown-menu'
-import type { Usuario } from '@workspace/api-presupuestos/services'
+import type { Usuario } from '@workspace/api-almacen/services'
 
 const route = getRouteApi('/_authenticated/(principal)/usuarios/')
 
@@ -23,10 +23,9 @@ type UsuarioCardProps = {
 }
 
 const roles = [
-  { value: 'admin', label: 'Admin' },
-  { value: 'provider', label: 'Provider' },
-  { value: 'seller', label: 'Seller' },
-  { value: 'registered', label: 'Registered' },
+  { value: 'propietario', label: 'Propietario' },
+  { value: 'principal', label: 'Principal' },
+  { value: 'secundario', label: 'Secundario' },
 ]
 
 export function UsuarioCard({ usuario }: UsuarioCardProps) {
@@ -43,10 +42,6 @@ export function UsuarioCard({ usuario }: UsuarioCardProps) {
               <h3 className='font-semibold text-lg'>
                 {usuario.nombres} {usuario.apellidos}
               </h3>
-            </div>
-            <div className='flex items-center gap-2 text-sm text-muted-foreground'>
-              <Mail className='h-3 w-3' />
-              <span>{usuario.email}</span>
             </div>
           </div>
           <DropdownMenu>
@@ -83,20 +78,20 @@ export function UsuarioCard({ usuario }: UsuarioCardProps) {
         <div className='space-y-3'>
           <div className='flex items-center justify-between'>
             <span className='text-sm font-medium'>Usuario:</span>
-            <span className='text-sm text-muted-foreground'>{usuario.usuario}</span>
+            <span className='text-sm text-muted-foreground'>{usuario.nombres} {usuario.apellidos}</span>
           </div>
           
           <div className='flex items-center justify-between'>
             <span className='text-sm font-medium'>Rol:</span>
-            <Badge variant={usuario.rol === 'admin' ? 'default' : 'secondary'}>
+            <Badge variant={(usuario.rol as 'propietario' | 'principal' | 'secundario') === 'principal' ? 'default' : 'secondary'}>
               {roleConfig?.label || usuario.rol}
             </Badge>
           </div>
           
           <div className='flex items-center justify-between'>
             <span className='text-sm font-medium'>Estado:</span>
-            <Badge variant={usuario.estado_habilitado ? 'default' : 'destructive'}>
-              {usuario.estado_habilitado ? 'Habilitado' : 'Deshabilitado'}
+            <Badge variant={usuario.estado === 'habilitado' ? 'default' : 'destructive'}>
+              {usuario.estado === 'habilitado' ? 'Habilitado' : 'Deshabilitado'}
             </Badge>
           </div>
           
@@ -111,15 +106,6 @@ export function UsuarioCard({ usuario }: UsuarioCardProps) {
             <div className='flex items-center justify-between'>
               <span className='text-sm font-medium'>Teléfono:</span>
               <span className='text-sm text-muted-foreground'>{usuario.telefono}</span>
-            </div>
-          )}
-          
-          {usuario.codigo_referido && (
-            <div className='flex items-center justify-between'>
-              <span className='text-sm font-medium'>Código Referido:</span>
-              <span className='text-sm text-muted-foreground font-mono'>
-                {usuario.codigo_referido}
-              </span>
             </div>
           )}
         </div>

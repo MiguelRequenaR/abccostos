@@ -10,28 +10,10 @@ import TrenesData from './components/trenes-data'
 import JobsData from './components/jobs-data'
 import PartidasData from './components/partidas-data'
 import { CustomEmpty } from '@/components/custom-empty'
-import { BrainIcon, HouseIcon, Rows4Icon, SettingsIcon } from 'lucide-react'
+import { HouseIcon } from 'lucide-react'
 
 const getEmptyContent = (primaryTab: string) => {
   switch (primaryTab) {
-    case 'trabajos':
-      return {
-        title: "Sin Trabajos",
-        description: "Aqui se mostrarán los trabajos",
-        icon: <BrainIcon />
-      }
-    case 'partidas':
-      return {
-        title: "Sin Partidas",
-        description: "Aqui se mostrarán las partidas",
-        icon: <Rows4Icon />
-      }
-    case 'trabajos-partidas':
-      return {
-        title: "Sin Trabajos y Partidas",
-        description: "Aqui se mostrarán los trabajos y partidas",
-        icon: <SettingsIcon />
-      }
     default:
       return {
         title: "Sin Contenido",
@@ -43,7 +25,7 @@ const getEmptyContent = (primaryTab: string) => {
 
 const renderTabContent = (activePrimaryTab: string) => {
   switch (activePrimaryTab) {
-    case "general":
+    case "gestion-trabajos":
       return <GestionTrabajos />
     case "unidades-produccion":
       return <UnidadesProduccionData />
@@ -53,10 +35,6 @@ const renderTabContent = (activePrimaryTab: string) => {
       return <JobsData />
     case "partidas":
       return <PartidasData />
-    case "trabajos-partidas": {
-      const emptyContent = getEmptyContent(activePrimaryTab)
-      return <CustomEmpty {...emptyContent} />
-    }
     default: {
       const emptyContent = getEmptyContent(activePrimaryTab)
       return <CustomEmpty {...emptyContent} />
@@ -65,7 +43,7 @@ const renderTabContent = (activePrimaryTab: string) => {
 }
 
 export function DatosPrincipales() {
-  const [activePrimaryTab, setActivePrimaryTab] = useState('general')
+  const [activePrimaryTab, setActivePrimaryTab] = useState('gestion-trabajos')
 
   return (
     <>

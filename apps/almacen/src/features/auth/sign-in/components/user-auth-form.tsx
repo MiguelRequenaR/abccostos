@@ -71,25 +71,25 @@ export function UserAuthForm({
       if (authData.user && authData.session) {
         await setAuth(authData.user, authData.session)
 
-        const { profile } = useAuthStore.getState()
-        const welcomeMessage = profile?.name
-          ? `¡Bienvenid@ de nuevo, ${profile.name}!`
+        const { usuario } = useAuthStore.getState()
+        const welcomeMessage = usuario?.nombres
+          ? `¡Bienvenid@ de nuevo, ${usuario.nombres}!`
           : '¡Bienvenid@ de nuevo!'
 
         toast.success(welcomeMessage)
 
         const getDefaultRoute = (role?: string) => {
           switch (role) {
-            case 'owner':
+            case 'propietario':
               return '/dashboard-propietario'
-            case 'admin':
+            case 'principal':
               return '/dashboard-admin'
-            case 'user':
+            case 'secundario':
             default:
               return '/'
           }
         }
-        const targetPath = redirectTo || getDefaultRoute(profile?.role)
+        const targetPath = redirectTo || getDefaultRoute(usuario?.rol)
         navigate({ to: targetPath, replace: true })
       }
     } catch (error) {

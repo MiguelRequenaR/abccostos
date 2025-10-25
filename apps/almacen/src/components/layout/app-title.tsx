@@ -7,8 +7,8 @@ import { ProjectSwitcher } from './project-switcher'
 
 export function AppTitle() {
   const { setOpenMobile, state } = useSidebar()
-  const { profile, user } = useAuthStore()
-  const sidebarData = getSidebarData(profile, user?.email)
+  const { usuario, user } = useAuthStore()
+  const sidebarData = getSidebarData(usuario, user?.email)
   //TODO: Cambiar por el tipo de presupuesto
 
   return (
@@ -19,27 +19,27 @@ export function AppTitle() {
         className='grid flex-1 text-center text-sm leading-tight'
       >
         <h3 className='truncate text-2xl font-bold'>CP360°</h3>
-        {state !== 'collapsed' && profile?.role === 'owner' && (
+        {state !== 'collapsed' && usuario?.rol === 'propietario' && (
           <span className='block truncate py-2 text-wrap'>
             Sistema Integral
             <br />
             de Gestión de Proyectos
           </span>
         )}
-        {state !== 'collapsed' && profile?.role !== 'owner' && (
+        {state !== 'collapsed' && usuario?.rol !== 'propietario' && (
           <span className='truncate'>Almacén</span>
         )}
-        {state !== 'collapsed' && profile?.role === 'admin' && (
+        {state !== 'collapsed' && usuario?.rol === 'principal' && (
           <span className='text-muted-foreground truncate py-2'>
             Consorcio ABC
           </span>
         )}
       </Link>
-      {state !== 'collapsed' && profile?.role === 'user' && (
+      {state !== 'collapsed' && usuario?.rol === 'secundario' && (
         <ProjectSwitcher projects={sidebarData.projects} />
       )}
 
-      {state !== 'collapsed' && profile?.role === 'user' && (
+      {state !== 'collapsed' && usuario?.rol === 'secundario' && (
         <Badge className='truncate bg-green-500'>Activo</Badge>
       )}
     

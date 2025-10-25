@@ -13,7 +13,7 @@ import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { UsuariosCards } from './components/usuarios-cards'
 import { UsuariosTable } from './components/usuarios-table'
-import { useUsuarios } from '@workspace/api-presupuestos/queries'
+import { useUsuarios } from '@workspace/api-almacen/queries'
 
 export function Usuarios() {
   const [activePrimaryTab, setActivePrimaryTab] = useState('activos')
@@ -57,12 +57,12 @@ export function Usuarios() {
 
   // Filter usuarios for active tab (enabled users)
   const activeUsuarios = usuarios.filter(
-    (usuario) => usuario.estado_habilitado === true
+    (usuario) => usuario.estado === 'habilitado'
   )
 
   // Filter disabled usuarios
   const disabledUsuarios = usuarios.filter(
-    (usuario) => usuario.estado_habilitado === false
+    (usuario) => usuario.estado === 'deshabilitado'
   )
 
   return (
