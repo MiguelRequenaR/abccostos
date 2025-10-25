@@ -42,7 +42,7 @@ export function PartidasToolbar({ enableRowExpansion, onToggleRowExpansion }: Pa
     <div className='flex flex-col lg:flex-row lg:justify-between gap-3 items-start lg:items-center'>
       {/* Search and filters section */}
       <div className='flex flex-wrap items-center gap-2'>
-        <div className='relative max-w-[220px] lg:max-w-xs'>
+        <div className='relative max-w-[180px] md:max-w-xs'>
           <Search className='absolute left-2 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground' />
           <Input
             placeholder='Buscar partida'
@@ -114,7 +114,8 @@ export function PartidasToolbar({ enableRowExpansion, onToggleRowExpansion }: Pa
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </div><Toggle
+        </div>
+        <Toggle
           aria-label="Toggle row expansion"
           size="sm"
           pressed={enableRowExpansion}
@@ -123,6 +124,7 @@ export function PartidasToolbar({ enableRowExpansion, onToggleRowExpansion }: Pa
         >
           <PanelBottom className='size-4' />
         </Toggle>
+
       </div>
 
       {/* Actions section */}
@@ -261,9 +263,7 @@ export function PartidasToolbar({ enableRowExpansion, onToggleRowExpansion }: Pa
 
           {/* Price card and selector */}
           <div className='flex gap-1'>
-            <Button variant='outline' size='sm'>
-              <span className='text-xs'>Tarjeta</span>
-            </Button>
+         
             <Select defaultValue='precio-meta'>
               <SelectTrigger className='w-[100px] h-8' size="sm">
                 <SelectValue />

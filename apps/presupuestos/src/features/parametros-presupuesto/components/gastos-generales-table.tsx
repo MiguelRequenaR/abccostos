@@ -66,7 +66,7 @@ export function GastosGeneralesTable({ data, columns }: DataTableProps) {
   })
 
   return (
-    <div className='space-y-0'>
+    <div>
       <GastosGeneralesToolbar />
       <div className='rounded-md border'>
         <Table>

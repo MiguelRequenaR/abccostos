@@ -32,7 +32,7 @@ export function Catalogos() {
             onTabChange={setActivePrimaryTab}
           />
         </div>
-        <Separator />
+        <Separator className='mb-4' />
         <SecondaryTabs activePrimaryTab={activePrimaryTab} />
       </Main>
     </>

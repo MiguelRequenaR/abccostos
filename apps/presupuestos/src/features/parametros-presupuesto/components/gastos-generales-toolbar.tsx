@@ -14,8 +14,8 @@ import {
 
 export function GastosGeneralesToolbar() {
   return (
-    <div className='flex items-center justify-between border-b bg-muted/30 px-4 py-2'>
-      <div className='flex items-center gap-1'>
+    <div className='flex items-center justify-end mb-2 '>
+      <div className='flex items-center'>
         <Button variant='ghost' size='icon' className='size-8'>
           <Grid3x3 className='size-4' />
         </Button>
@@ -44,12 +44,7 @@ export function GastosGeneralesToolbar() {
           <Repeat2 className='size-4' />
         </Button>
       </div>
-      <div className='flex items-center gap-2'>
-        <Button variant='ghost' size='icon' className='size-8'>
-          <Repeat2 className='size-4' />
-        </Button>
-        <span className='text-sm font-medium'>Titulo</span>
-      </div>
+
     </div>
   )
 }

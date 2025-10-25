@@ -1,7 +1,18 @@
 import { useState } from 'react'
+import {
+  type ColumnFiltersState,
+  type SortingState,
+  type VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from '@tanstack/react-table'
 import { Input } from '@workspace/ui/components/input'
 import { Button } from '@workspace/ui/components/button'
-import { PlusIcon, SearchIcon, MoreVerticalIcon } from 'lucide-react'
+import { PlusIcon, SearchIcon } from 'lucide-react'
 import {
   Select,
   SelectContent,
@@ -10,13 +21,16 @@ import {
   SelectValue,
 } from '@workspace/ui/components/select'
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@workspace/ui/components/dropdown-menu'
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@workspace/ui/components/table'
+import { usuariosColumns } from './usuarios-columns'
 
-interface Usuario {
+export interface Usuario {
   id: string
   nombreCompleto: string
   rol: string
@@ -51,7 +65,29 @@ const mockData: Usuario[] = [
 ]
 
 export default function UsuariosData() {
-  const [searchQuery, setSearchQuery] = useState('')
+  const [sorting, setSorting] = useState<SortingState>([])
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = useState({})
+
+  const table = useReactTable({
+    data: mockData,
+    columns: usuariosColumns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection,
+    },
+  })
 
   return (
     <div className='space-y-4'>
@@ -60,9 +96,11 @@ export default function UsuariosData() {
         <div className='relative flex-1 max-w-sm'>
           <SearchIcon className='absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground' />
           <Input
-            placeholder='Buscar Sub-presupuesto'
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder='Buscar usuarios...'
+            value={(table.getColumn('nombreCompleto')?.getFilterValue() as string) ?? ''}
+            onChange={(event) =>
+              table.getColumn('nombreCompleto')?.setFilterValue(event.target.value)
+            }
             className='pl-9'
           />
         </div>
@@ -71,7 +109,12 @@ export default function UsuariosData() {
             <PlusIcon className='h-4 w-4' />
             Registrar usuario
           </Button>
-          <Select defaultValue='10'>
+          <Select
+            value={`${table.getState().pagination.pageSize}`}
+            onValueChange={(value) => {
+              table.setPageSize(Number(value))
+            }}
+          >
             <SelectTrigger className='w-20'>
               <SelectValue />
             </SelectTrigger>
@@ -86,52 +129,80 @@ export default function UsuariosData() {
       </div>
 
       {/* Table */}
-      <div className='rounded-lg border bg-white'>
-        <div className='overflow-x-auto'>
-          <table className='w-full'>
-            <thead className='border-b bg-gray-100'>
-              <tr>
-                <th className='p-3 text-left text-sm font-semibold'>Id</th>
-                <th className='p-3 text-left text-sm font-semibold'>
-                  Nombre completo
-                </th>
-                <th className='p-3 text-left text-sm font-semibold'>Rol</th>
-                <th className='p-3 text-center text-sm font-semibold'>
-                  Acciones
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {mockData.map((usuario, index) => (
-                <tr
-                  key={usuario.id}
-                  className={`border-b last:border-0 ${
-                    index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
-                  }`}
+      <div className='rounded-md border'>
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
+                  )
+                })}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && 'selected'}
                 >
-                  <td className='p-3 text-sm'>{usuario.id}</td>
-                  <td className='p-3 text-sm'>{usuario.nombreCompleto}</td>
-                  <td className='p-3 text-sm'>{usuario.rol}</td>
-                  <td className='p-3 text-center'>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant='ghost' size='icon' className='h-8 w-8'>
-                          <MoreVerticalIcon className='h-4 w-4' />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align='end'>
-                        <DropdownMenuItem>Editar</DropdownMenuItem>
-                        <DropdownMenuItem>Duplicar</DropdownMenuItem>
-                        <DropdownMenuItem className='text-destructive'>
-                          Eliminar
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={usuariosColumns.length}
+                  className='h-24 text-center'
+                >
+                  Sin resultados.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* Pagination */}
+      <div className='flex items-center justify-end space-x-2 py-4'>
+        <div className='flex-1 text-sm text-muted-foreground'>
+          {table.getFilteredSelectedRowModel().rows.length} de{' '}
+          {table.getFilteredRowModel().rows.length} fila(s) seleccionada(s).
+        </div>
+        <div className='space-x-2'>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            Anterior
+          </Button>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            Siguiente
+          </Button>
         </div>
       </div>
     </div>

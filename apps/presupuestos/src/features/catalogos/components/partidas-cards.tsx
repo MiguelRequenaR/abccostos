@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Search, Save, FileDown, Download, Upload, Plus } from 'lucide-react'
-import { Button } from '@workspace/ui/components/button'
 import { Input } from '@workspace/ui/components/input'
+import ResponsiveToolbar from './responsive-toolbar'
 import { PartidaCard } from './partida-card'
 
 interface Partida {
@@ -69,33 +69,50 @@ export default function PartidasCards() {
               placeholder="Buscar partida"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 w-64"
+              className="pl-10 max-w-sm"
             />
           </div>
         </div>
         
-        <div className="flex items-center space-x-2">
-          <Button variant="outline" size="sm">
-            <Save className="h-4 w-4 mr-2" />
-            Guardar
-          </Button>
-          <Button variant="outline" size="sm">
-            <FileDown className="h-4 w-4 mr-2" />
-            PDF
-          </Button>
-          <Button variant="outline" size="sm">
-            <Download className="h-4 w-4 mr-2" />
-            Excel
-          </Button>
-          <Button variant="outline" size="sm">
-            <Upload className="h-4 w-4 mr-2" />
-            Importar
-          </Button>
-          <Button size="sm">
-            <Plus className="h-4 w-4 mr-2" />
-            Nuevo Partida
-          </Button>
-        </div>
+        <ResponsiveToolbar
+          actions={[
+            {
+              label: 'Guardar',
+              icon: <Save className="h-4 w-4" />,
+              onClick: () => console.log('Save'),
+              variant: 'outline',
+              priority: 'high'
+            },
+            {
+              label: 'PDF',
+              icon: <FileDown className="h-4 w-4" />,
+              onClick: () => console.log('PDF export'),
+              variant: 'outline',
+              priority: 'high'
+            },
+            {
+              label: 'Excel',
+              icon: <Download className="h-4 w-4" />,
+              onClick: () => console.log('Excel export'),
+              variant: 'outline',
+              priority: 'high'
+            },
+            {
+              label: 'Importar',
+              icon: <Upload className="h-4 w-4" />,
+              onClick: () => console.log('Import'),
+              variant: 'outline',
+              priority: 'medium'
+            },
+            {
+              label: 'Nuevo Partida',
+              icon: <Plus className="h-4 w-4" />,
+              onClick: () => console.log('New partida'),
+              variant: 'default',
+              priority: 'high'
+            }
+          ]}
+        />
       </div>
 
       {/* Cards */}

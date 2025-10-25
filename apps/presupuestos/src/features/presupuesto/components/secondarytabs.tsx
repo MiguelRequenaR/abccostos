@@ -1,5 +1,4 @@
 import { CustomEmpty } from '@/components/custom-empty'
-import { useIsMobile } from '@/hooks/use-mobile'
 import {
   Tabs,
   TabsContent,
@@ -156,7 +155,6 @@ export default function SecondaryTabs({
   const [activeSecondaryTab, setActiveSecondaryTab] = useState(
     currentSecondaryTabs.length > 0 ? currentSecondaryTabs[0].value : ''
   )
-  const isMobile = useIsMobile()
 
   useEffect(() => {
     const newSecondaryTabs = secondaryTabs[activePrimaryTab] || []

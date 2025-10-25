@@ -16,7 +16,7 @@ interface SubPresupuestoCardProps {
 
 export function SubPresupuestoCard({ item }: SubPresupuestoCardProps) {
   return (
-    <div className='rounded-lg border bg-white p-4 space-y-3'>
+    <div className='rounded-lg border p-4 space-y-3'>
       {/* Header with checkbox and actions */}
       <div className='flex items-center justify-between'>
         

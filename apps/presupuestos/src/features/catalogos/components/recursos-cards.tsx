@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Search, FileDown, Download, Upload, Plus } from 'lucide-react'
-import { Button } from '@workspace/ui/components/button'
 import { Input } from '@workspace/ui/components/input'
+import ResponsiveToolbar from './responsive-toolbar'
 import { RecursoCard } from './recurso-card'
 
 interface Recurso {
@@ -36,32 +36,49 @@ export default function RecursosCards() {
               placeholder="Buscar recursos"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 w-64"
+              className="pl-10 max-w-sm"
             />
           </div>
         </div>
         
-        <div className="flex items-center space-x-2">
-          <Button variant="outline" size="sm">
-            <FileDown className="h-4 w-4 mr-2" />
-            PDF
-          </Button>
-          <Button variant="outline" size="sm">
-            <Download className="h-4 w-4 mr-2" />
-            Excel
-          </Button>
-          <Button variant="outline" size="sm">
-            Exportar
-          </Button>
-          <Button variant="outline" size="sm">
-            <Upload className="h-4 w-4 mr-2" />
-            Importar
-          </Button>
-          <Button size="sm">
-            <Plus className="h-4 w-4 mr-2" />
-            Nuevo Recurso
-          </Button>
-        </div>
+        <ResponsiveToolbar
+          actions={[
+            {
+              label: 'PDF',
+              icon: <FileDown className="h-4 w-4" />,
+              onClick: () => console.log('PDF export'),
+              variant: 'outline',
+              priority: 'high'
+            },
+            {
+              label: 'Excel',
+              icon: <Download className="h-4 w-4" />,
+              onClick: () => console.log('Excel export'),
+              variant: 'outline',
+              priority: 'high'
+            },
+            {
+              label: 'Exportar',
+              onClick: () => console.log('Export'),
+              variant: 'outline',
+              priority: 'medium'
+            },
+            {
+              label: 'Importar',
+              icon: <Upload className="h-4 w-4" />,
+              onClick: () => console.log('Import'),
+              variant: 'outline',
+              priority: 'medium'
+            },
+            {
+              label: 'Nuevo Recurso',
+              icon: <Plus className="h-4 w-4" />,
+              onClick: () => console.log('New resource'),
+              variant: 'default',
+              priority: 'high'
+            }
+          ]}
+        />
       </div>
 
       {/* Cards */}

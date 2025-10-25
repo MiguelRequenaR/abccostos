@@ -4,6 +4,7 @@ import { Button } from '@workspace/ui/components/button'
 import { Input } from '@workspace/ui/components/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@workspace/ui/components/table'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@workspace/ui/components/dropdown-menu'
+import ResponsiveToolbar from './responsive-toolbar'
 
 interface IndiceUnificado {
   codigo: string
@@ -73,22 +74,38 @@ export default function IndicesUnificadosTable() {
         </div>
         
         <div className="flex items-center space-x-2">
-          <Button variant="outline" size="sm">
-            <FileDown className="h-4 w-4 mr-2" />
-            PDF
-          </Button>
-          <Button variant="outline" size="sm">
-            <Download className="h-4 w-4 mr-2" />
-            Excel
-          </Button>
-          <Button variant="outline" size="sm">
-            <Upload className="h-4 w-4 mr-2" />
-            Importar
-          </Button>
-          <Button size="sm">
-            <Plus className="h-4 w-4 mr-2" />
-            Nuevo Índice Unificado
-          </Button>
+          <ResponsiveToolbar
+            actions={[
+              {
+                label: 'PDF',
+                icon: <FileDown className="h-4 w-4" />,
+                onClick: () => console.log('PDF export'),
+                variant: 'outline',
+                priority: 'high'
+              },
+              {
+                label: 'Excel',
+                icon: <Download className="h-4 w-4" />,
+                onClick: () => console.log('Excel export'),
+                variant: 'outline',
+                priority: 'high'
+              },
+              {
+                label: 'Importar',
+                icon: <Upload className="h-4 w-4" />,
+                onClick: () => console.log('Import'),
+                variant: 'outline',
+                priority: 'medium'
+              },
+              {
+                label: 'Nuevo Índice Unificado',
+                icon: <Plus className="h-4 w-4" />,
+                onClick: () => console.log('New unified index'),
+                variant: 'default',
+                priority: 'high'
+              }
+            ]}
+          />
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

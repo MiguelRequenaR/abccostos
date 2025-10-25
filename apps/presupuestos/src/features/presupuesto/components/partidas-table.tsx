@@ -154,7 +154,6 @@ export function PartidasTable({ data, columns, enableRowExpansion = false }: Dat
           </TableBody>
         </Table>
       </div>
-
       <DataTablePagination table={table} />
       
       <PartidasFooter />

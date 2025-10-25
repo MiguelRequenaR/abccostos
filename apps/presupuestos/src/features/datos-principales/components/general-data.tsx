@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Input } from '@workspace/ui/components/input'
 import { Label } from '@workspace/ui/components/label'
 import { Button } from '@workspace/ui/components/button'
-import { PlusIcon, SearchIcon } from 'lucide-react'
+import { PlusIcon, SearchIcon, ChevronUpIcon, ChevronDownIcon } from 'lucide-react'
 import {
   Select,
   SelectContent,
@@ -69,6 +69,7 @@ const mockData: SubPresupuesto[] = [
 export default function GeneralData() {
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set())
   const [searchQuery, setSearchQuery] = useState('')
+  const [isFormCollapsed, setIsFormCollapsed] = useState(false)
 
   const handleSelectAll = (checked: boolean) => {
     if (checked) {
@@ -91,7 +92,27 @@ export default function GeneralData() {
   return (
     <div className='space-y-6'>
       {/* Form Section */}
-      <div className="rounded-lg border  p-6">
+      <div >
+        {/* Collapse Button */}
+        <div className="flex items-center justify-between ">
+          <h3 className="text-lg font-semibold">Datos Generales</h3>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsFormCollapsed(!isFormCollapsed)}
+            className="gap-2"
+          >
+            {isFormCollapsed ? (
+                <ChevronDownIcon className="h-4 w-4" />
+            ) : (
+                <ChevronUpIcon className="h-4 w-4" />
+            )}
+          </Button>
+        </div>
+        
+        {/* Collapsible Form Content */}
+        <div className={`transition-all duration-300 ${isFormCollapsed ? 'max-h-0 overflow-hidden' : 'max-h-none'}`}>
+          <div className='border rounded-md p-4 my-4'>
         <div
           className="
             grid
@@ -158,6 +179,7 @@ export default function GeneralData() {
             <Label htmlFor="moneda">Moneda</Label>
             <Input id="moneda" />
           </div>
+          </div>
         </div>
       </div>
 
@@ -203,6 +225,7 @@ export default function GeneralData() {
           onGlobalFilterChange={setSearchQuery}
         />
       </div>
+    </div>
     </div>
   )
 }
